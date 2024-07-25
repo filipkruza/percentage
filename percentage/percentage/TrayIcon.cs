@@ -9,6 +9,8 @@ namespace percentage
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern bool DestroyIcon(IntPtr handle);
+        [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
+        public static extern bool isSystemDark();
 
         private const int fontSize = 18;
         private const string font = "Segoe UI";
@@ -93,7 +95,7 @@ namespace percentage
             }
 
             (String, String) texts = GetPowerStrings();
-            Color fontColor = Color.White;
+            Color fontColor = (isSystemDark() ? Color.White : Color.Black);
             using (Bitmap bitmap = CreateBitmap(texts.Item1,fontColor))
             {
                 IntPtr intPtr = bitmap.GetHicon();
