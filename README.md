@@ -19,7 +19,7 @@ This fork has additional features
 
 1. [Download the latest release](https://github.com/filipkruza/percentage/releases)
 1. Put percentage.exe in your startup folder
-   1. To get to your startup folder, press `Windows`+`R`, type `shell:startup`
+1. To get to your startup folder, press `Windows`+`R`, type `shell:startup`
 
 ## Compiling
 
