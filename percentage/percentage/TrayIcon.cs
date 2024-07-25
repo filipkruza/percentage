@@ -84,8 +84,6 @@ namespace percentage
                 bool isCharging = SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Online;
                 String tooltipText = percentage + "%" + (isCharging ? " Charging" : "");
                 String bitmapText = percentage;
-                if (percentage == "100")
-                    bitmapText = "F";
                 return (bitmapText, tooltipText);
             }
 
