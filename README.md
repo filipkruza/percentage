@@ -7,19 +7,18 @@ See your battery percentage in the Windows 10/11 system tray/notification area
 ## Fork
 
 This fork has additional features
-- meant to be used alongside normal icon, so disabled charging icon ( `96*` -> `96` )
 - Light theme support (text can be shown in black color)
 
    ![image](./res/screenshot2.jpg)
-- Updated .NET to v4.7.2
+- Updated .NET from 4.5.2 to .NET Core 8.0 LTS
+- meant to be used alongside normal icon, so disabled charging icon ( `96*` -> `96` )
 - starting up a lot faster
-- Update timer reduced from 1 to 5s
 
 ## Installing
 
-1. [Download the latest release](https://github.com/filipkruza/percentage/releases)
-1. Put percentage.exe in your startup folder
-1. To get to your startup folder, press `Windows`+`R`, type `shell:startup`
+<!-- 1. [Download the latest release](https://github.com/filipkruza/percentage/releases) -->
+1. Build program
+1. Get to your startup folder (press `Windows`+`R`, type `shell:startup`) and put program there
 
 ## Compiling
 
@@ -34,7 +33,7 @@ To build the project
    ![image](./res/screenshot3.jpg)
 
 1. Click "Build > Build Solution"
-1. percentage.exe can be found at percentage\percentage\percentage\bin\Release\percentage.exe
+1. percentage can be found at `src\bin\Release\`
 
 ## Contributions
 

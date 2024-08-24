@@ -8,12 +8,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Form1.cs" />
-    <Compile Remove="Form1.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-  </ItemGroup>
-
 </Project>

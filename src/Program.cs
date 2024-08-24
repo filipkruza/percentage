@@ -1,22 +1,17 @@
-using System;
-using System.Windows.Forms;
+namespace percentage;
 
-namespace percentage
+static class Program
 {
-    static class Program
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
 
-            TrayIcon trayIcon = new TrayIcon();
-
-            Application.Run();
-        }
+        _ = new TrayIcon();
+        Application.Run();
     }
 }
