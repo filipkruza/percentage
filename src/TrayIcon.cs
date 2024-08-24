@@ -2,12 +2,13 @@
 
 namespace percentage
 {
-    class TrayIcon
+    partial class TrayIcon
     {
-        [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
-        public static extern bool isSystemDark();
+        [LibraryImport("UXTheme.dll", EntryPoint = "#138A", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static partial bool isSystemDark();
 
-        private NotifyIcon notifyIcon;
+        private readonly NotifyIcon notifyIcon;
 
         public TrayIcon()
         {
@@ -36,7 +37,7 @@ namespace percentage
                 graphics.Clear(Color.FromArgb(0, 0, 0, 0));
                 var textColor = (isSystemDark()) ? Color.White : Color.Black;
                 using var brush = new SolidBrush(textColor);
-                graphics.DrawString(text, new System.Drawing.Font("Segoe UI", 16), brush, 0, 0);
+                graphics.DrawString(text, new Font("Segoe UI", 16), brush, 0, 0);
                 graphics.Save();
                 icon = Icon.FromHandle(bitmap.GetHicon());
             }
