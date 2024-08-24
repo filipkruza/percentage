@@ -12,13 +12,14 @@ namespace percentage
 
         public TrayIcon()
         {
-            notifyIcon = new NotifyIcon();
-            notifyIcon.ContextMenuStrip = new ContextMenuStrip();
-            notifyIcon.ContextMenuStrip.Items.Add(new ToolStripMenuItem("Exit", null, MenuExitClick));
+            notifyIcon = new NotifyIcon { ContextMenuStrip = new ContextMenuStrip() };
+            notifyIcon.ContextMenuStrip.Items.Add(new ToolStripMenuItem("Exit", null, (object sender, EventArgs e) => {
+                notifyIcon.Visible = false;
+                notifyIcon.Dispose();
+                Application.Exit();
+            }));
             notifyIcon.Visible = true;
-
-            Update();
-            new System.Threading.Timer(Update, null, 0, 2000);
+            Start();
         }
 
         private static Icon GetIcon(String text)
@@ -44,23 +45,19 @@ namespace percentage
             return icon;
         }
 
-        private void MenuExitClick(object? sender, EventArgs? e)
+        async private void Start()
         {
-            notifyIcon.Visible = false;
-            notifyIcon.Dispose();
-            Application.Exit();
-        }
+            var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+            while (await periodicTimer.WaitForNextTickAsync())
+            { 
+                var percentage = (SystemInformation.PowerStatus.BatteryLifePercent * 100).ToString();
+                var isCharging = SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Online;
+                var bitmapText = percentage;
+                var tooltipText = percentage + "%" + (isCharging ? " Charging" : "");
 
-        private void Update(object? state = null)
-        {
-            var powerStatus = SystemInformation.PowerStatus;
-            var percentage = (powerStatus.BatteryLifePercent * 100).ToString();
-            var isCharging = SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Online;
-            var bitmapText = percentage;
-            var tooltipText = percentage + "%" + (isCharging ? " Charging" : "");
-
-            notifyIcon.Icon = GetIcon(bitmapText);
-            notifyIcon.Text = tooltipText;
+                notifyIcon.Icon = GetIcon(bitmapText);
+                notifyIcon.Text = tooltipText;
+            }
         }
     }
 }
